@@ -8,4 +8,6 @@ public interface IStack<E> {
     void push(E item);
 
     int size();
+
+    void clear();
 }

@@ -36,4 +36,10 @@ class StackTest {
     void size() {
         assertEquals(1, stack.size());
     }
+
+    @Test
+    void clear() {
+        stack.clear();
+        assertEquals(0, stack.size());
+    }
 }

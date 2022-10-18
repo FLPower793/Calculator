@@ -10,7 +10,7 @@ import uidriver.IUIDriver;
 
 import java.util.List;
 
-public class StackCalculator {
+public class StackCalculator implements ICalculator {
     private final ICalculatorContext context;
     private final IExpressionReader reader;
     private final IExpressionParser parser;
@@ -49,7 +49,13 @@ public class StackCalculator {
             } catch (CommandException | ParserException e) {
                 uiDriver.showError(e.getMessage());
             }
+            resetState();
         }
+    }
+
+    @Override
+    public void resetState() {
+        context.getStack().clear();
     }
 
 }

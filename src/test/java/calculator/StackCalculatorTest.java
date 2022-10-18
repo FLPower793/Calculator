@@ -27,9 +27,9 @@ class StackCalculatorTest {
     private static final ICommand commandMock = mock(ICommand.class);
     private static final ArgumentCaptor<String> uiStringCaptor = ArgumentCaptor.forClass(String.class);
     private static final ArgumentCaptor<Double> pushToStackCaptor = ArgumentCaptor.forClass(Double.class);
+    private static final IStack<Double> stackMock = mock(IStack.class);
 
     void prepareContext() {
-        IStack<Double> stackMock = mock(IStack.class);
         doNothing().when(stackMock).push(pushToStackCaptor.capture());
         when(stackMock.pop()).thenReturn(3.0);
 
@@ -108,5 +108,16 @@ class StackCalculatorTest {
         calculator.start();
 
         verify(uiDriverMock, times(1)).showError("Test");
+    }
+
+    @Test
+    void resetState() throws ParserException {
+        prepareContext();
+        prepareParser();
+        prepareReader();
+        prepareUIDriver();
+        StackCalculator calculator = new StackCalculator(contextMock, readerMock, parserMock, uiDriverMock);
+        calculator.resetState();
+        verify(stackMock, times(1)).clear();
     }
 }

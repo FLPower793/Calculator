@@ -29,4 +29,9 @@ public class Stack<E> implements IStack<E> {
     public int size() {
         return stack.size();
     }
+
+    @Override
+    public void clear() {
+        stack.clear();
+    }
 }
